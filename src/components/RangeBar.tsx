@@ -18,7 +18,7 @@ const RangeBar = ({ value }: RangeBarProps): React.JSX.Element => {
   }
   return (
     <div className='w-fill h-4 bg-gray-300'>
-      <div className={`h-4 bg-gray-300 border-r-4 border-indigo-500`} style={{ width: `${value}% ` }}></div>
+      <div className={`h-4 bg-gray-300 border-r-4 ${value === 50 ? `border-green-500` : `border-red-500`}`} style={{ width: `${value}% ` }}></div>
     </div>
   );
 };

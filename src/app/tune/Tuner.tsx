@@ -19,7 +19,7 @@ const Tuner = () => {
   const [audioInput, setAudioInput] = useState<TunerProps>({ freq: 0, note: 0, noteName: '', octave: 0, cents: 0 });
 
   // 1. accessing user's microphone
-  navigator.mediaDevices // navigator only in browser envt (not server side)
+  global.navigator.mediaDevices // navigator only in browser envt (not server side)
     .getUserMedia({ audio: true })
     .then(stream => {
       // Handle the microphone stream
@@ -41,7 +41,7 @@ const Tuner = () => {
       scriptNode.onaudioprocess = event => {
         const inputData = event.inputBuffer.getChannelData(0);
         // Process or analyze audio data here
-        console.log('what is inputData', inputData);
+        // console.log('what is inputData', inputData);
 
         const detectPitch = Pitchfinder.AMDF({
           maxFrequency: 800,
@@ -92,14 +92,16 @@ const Tuner = () => {
       <h1 className='text-xl font-bold p-4'>{pathname}</h1>
       <div className='flex flex-col items-center'>
         <div className='flex flex-col items-center p-4 m-8 w-1/2 h-1/2 border-solid rounded-lg bg-slate-400'>
-          <span>{audioInput.noteName}</span>
-          <span>{audioInput.octave}</span>
+          <div className='flex flex-row'>
+            <h4 className='text-xxl'>{audioInput.noteName}</h4>
+            {audioInput.octave !== 0 && <span>{audioInput.octave}</span>}
+          </div>
           <p>{audioInput.freq.toFixed(2)} Hz</p>
           <p>{audioInput.note} note</p>
           <p>{audioInput.cents} cent</p>
         </div>
       </div>
-      <RangeBar value={0} />
+      <RangeBar value={audioInput.cents} />
     </>
   );
 };

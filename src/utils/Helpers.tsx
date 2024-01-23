@@ -23,7 +23,7 @@ export const getCents = (frequency: number, note: any) => {
 
 /* TRANSPOSE */
 
-const chordFamilyChart = [
+export const chordFamilyChart = [
   { key: 'A', value: ['A', 'Bm', 'C#m', 'D', 'E', 'F#m', 'G#dim'] },
   { key: 'B', value: ['B', 'C#m', 'D#m', 'E', 'F#', 'G#m', 'A#dim'] },
   { key: 'C', value: ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'Bdim'] },
